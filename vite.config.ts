@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/smt-client",
-  server: {
-    port: 3000
-  }
+  base: "/at-tools",
+  // server: {
+  //   port: 3000
+  // }
 })
