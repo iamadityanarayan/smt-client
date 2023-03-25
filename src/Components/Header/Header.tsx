@@ -8,9 +8,9 @@ type Props = {}
 
 const Header = (props: Props) => {
   return (
-    <Navbar bg="secondary" expand="lg" variant="dark">
+    <Navbar bg="primary" expand="lg" variant="dark">
     <Container>
-      <Navbar.Brand href="#home">Logo</Navbar.Brand>
+      <Navbar.Brand href="#home" className='font-lobster'>AT Tools</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
     

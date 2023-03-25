@@ -1,24 +1,24 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../Components/Header'
-import Siderbar from '../Components/Sidebar'
+import Sidebar from '../Components/Sidebar'
 
 type Props = {}
 
 const AppLayout = (props: Props) => {
   return (
-    <>
+    <React.Fragment>
       <Header />
       <main className='container'>
-        <div className="d-flex min-vh-100">
-          <Siderbar />
-          <div className="flex-grow-1 bg-light">
+        <div className="min-vh-100">
+          {/* <Sidebar /> */}
+          <div className="flex-grow-1 pt-2">
             <Outlet />
           </div>
         </div>
       </main>
-    </>
+    </React.Fragment>
   )
 }
 
-export default AppLayout
+export default AppLayout;

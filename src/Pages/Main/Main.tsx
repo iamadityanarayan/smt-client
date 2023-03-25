@@ -1,12 +1,12 @@
 import React from 'react'
-import Siderbar from '../../Components/Sidebar';
+import Sidebar from '../../Components/Sidebar';
 
 type Props = {}
 
 const Main = (props: Props) => {
   return (
     <div className='d-flex mt-4'>
-      <Siderbar />
+      <Sidebar />
       <div className="content">xyz</div>
     </div>
   )

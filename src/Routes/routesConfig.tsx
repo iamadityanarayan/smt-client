@@ -4,6 +4,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import Dashboard from "../Pages/Dashboard";
 import ErrorPage from "../Pages/Error";
 import NoteApp from "../Pages/NoteApp";
 import WorkExp from "../Pages/WorkExperience";
@@ -15,8 +16,12 @@ export const router = createBrowserRouter([
     element: (<AppLayout />),
     errorElement: <ErrorPage />,
     children: [
+      // {
+      //   path: "/",
+      //   element: <Dashboard />,
+      // },
       {
-        path: "/wk",
+        path: "/",
         element: <WorkExp />,
       },
       {
