@@ -33,13 +33,13 @@ const schema = yup.object({
   startDate: yup
     .date()
     .nullable()
-    .required('This field is required')
-    .typeError('Must be a `date` type'),
+    .typeError('Must be a `date` type')
+    .required('This field is required'),
   endDate: yup
     .date()
     .nullable()
-    .required('This field is required')
     .typeError('Must be a `date` type')
+    .required('This field is required')
     .test('endDate', 'Must be greater than start date', (value: any) => {
       if (value) {
         return isBefore(
