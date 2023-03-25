@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Footer from '../Components/Footer'
 import Header from '../Components/Header'
 import Sidebar from '../Components/Sidebar'
 
@@ -17,6 +18,7 @@ const AppLayout = (props: Props) => {
           </div>
         </div>
       </main>
+      <Footer />
     </React.Fragment>
   )
 }
