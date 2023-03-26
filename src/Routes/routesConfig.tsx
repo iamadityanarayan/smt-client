@@ -7,6 +7,7 @@ import {
 import Dashboard from "../Pages/Dashboard";
 import ErrorPage from "../Pages/Error";
 import NoteApp from "../Pages/NoteApp";
+import PasswordGenerator from "../Pages/PasswordGenerator";
 import WorkExp from "../Pages/WorkExperience";
 import AppLayout from "./AppLayout";
 
@@ -21,8 +22,12 @@ export const router = createBrowserRouter([
       //   element: <Dashboard />,
       // },
       {
-        path: "/smt-client/",
+        path: "/",
         element: <WorkExp />,
+      },
+      {
+        path: "/password-generator",
+        element: <PasswordGenerator />,
       },
       {
         path: "/na",
