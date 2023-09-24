@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       //   element: <Dashboard />,
       // },
       {
-        path: "/smt-client/",
+        path: "/",
         element: <WorkExp />,
       },
       {
