@@ -28,3 +28,7 @@ body, html{
   background-image: linear-gradient(90deg,#F4F4F4 0%,#EFEFEF 100%);
   transition: color .2s,opacity .2s;
 }
+
+._f-space{
+  text-indent: 10px;
+}
