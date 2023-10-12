@@ -1,4 +1,4 @@
-import { Row, Col, Alert } from 'react-bootstrap';
+import { Row, Col, Alert, InputGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -106,7 +106,7 @@ const ExpForm = () => {
         <Row className=' justify-content-center'>
           <Col lg={4} className='mb-3'>
             <Form.Group className=''>
-              <Form.Label className='text-light'>Company Name</Form.Label>
+              <Form.Label className='text-light d-none d-lg-block'>Company Name</Form.Label>
               <Controller
                 control={control}
                 name='companyName'
@@ -116,11 +116,12 @@ const ExpForm = () => {
                     placeholder='Company Name'
                     {...field}
                   />
+                  
                 )}
               />
             </Form.Group>
           </Col>
-          <Col lg={4} className='mb-3'>
+          <Col lg={4} className='mb-3 d-none d-lg-block'>
             <Form.Group>
               <Form.Label className='text-light'>Start Date</Form.Label>
               <Controller
@@ -133,7 +134,25 @@ const ExpForm = () => {
               )}
             </Form.Group>
           </Col>
-          <Col lg={4} className='mb-3'>
+          <Col lg={4} className='mb-3 d-lg-none d-block'>
+            <Controller
+              name='startDate'
+              control={control}
+              render={({ field }) => (
+                // <Form.Control type='date' {...field} />
+                <InputGroup className=''>
+                  <InputGroup.Text id='basic-addon1'>
+                    Start Date
+                  </InputGroup.Text>
+                  <Form.Control type='date' {...field} />
+                </InputGroup>
+              )}
+            />
+            {errors.startDate && (
+              <Alert variant='danger'>{errors.startDate.message}</Alert>
+            )}
+          </Col>
+          <Col lg={4} className='mb-3 d-none d-lg-block'>
             <Form.Group>
               <Form.Label className='text-light'>End Date</Form.Label>
               <Controller
@@ -145,6 +164,22 @@ const ExpForm = () => {
                 <Alert variant='danger'>{errors.endDate.message}</Alert>
               )}
             </Form.Group>
+          </Col>
+          <Col lg={4} className='mb-3 d-lg-none d-block'>
+            <Controller
+              name='endDate'
+              control={control}
+              render={({ field }) => (
+                // <Form.Control type='date' {...field} />
+                <InputGroup className=''>
+                  <InputGroup.Text id='basic-addon2'>End Date</InputGroup.Text>
+                  <Form.Control type='date' {...field} />
+                </InputGroup>
+              )}
+            />
+            {errors.startDate && (
+              <Alert variant='danger'>{errors.startDate.message}</Alert>
+            )}
           </Col>
         </Row>
         <div className='d-grid d-lg-flex gap-3 justify-content-lg-center'>
@@ -159,6 +194,7 @@ const ExpForm = () => {
             variant='warning'
             className='text-white d-flex align-items-center justify-content-center gap-2'
             type='reset'
+            onClick={() => reset()}
           >
             <IoMdRefresh className='fs-5' /> Reset
           </Button>

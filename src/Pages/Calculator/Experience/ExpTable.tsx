@@ -147,116 +147,123 @@ const ExpTable = () => {
         //   </div>
         // </div>
       )} */}
-      <div className='exp-mui-table exp-form mx-auto'>
-        <div className='d-flex justify-content-between'>
-          <div className='buttons d-flex gap-3 my-3'>
-            <Button variant='primary' onClick={handleHide}>
-              {!hideTable ? 'Hide Table' : 'Show Table'}
-            </Button>
-          </div>
-          {!hideTable && (
-            <div className='buttons d-flex justify-content-end gap-3 my-3'>
-              <Button
-                variant='danger'
-                disabled={isDisabled}
-                onClick={handleRemoveDataFromLocal}
-              >
-                Remove all
-              </Button>
-              <Button variant='primary' onClick={handleSaveToLocal}>
-                Save
+      {state.length && (
+        <div className='exp-mui-table exp-form mx-auto'>
+          <div className='d-flex justify-content-between'>
+            <div className='buttons d-flex gap-3 my-3'>
+              <Button variant='primary' onClick={handleHide}>
+                {!hideTable ? 'Hide Table' : 'Show Table'}
               </Button>
             </div>
+            {!hideTable && (
+              <div className='buttons d-flex justify-content-end gap-3 my-3'>
+                <Button
+                  variant='danger'
+                  disabled={isDisabled}
+                  onClick={handleRemoveDataFromLocal}
+                >
+                  Remove all
+                </Button>
+                <Button variant='primary' onClick={handleSaveToLocal}>
+                  Save
+                </Button>
+              </div>
+            )}
+          </div>
+          {!hideTable && (
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      #
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      Company Name
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      Start Date
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      End Date
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      Experience
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      Edit
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      className='fw-bold bg-secondary text-white'
+                    >
+                      Delete
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {state.map((row, i) => {
+                    const getDifferenceInDates = () => {
+                      let startDate = new Date(row.startDate);
+                      let endDate = new Date(row.endDate);
+                      const yearsDiff = differenceInYears(endDate, startDate);
+                      const monthsDiff =
+                        differenceInMonths(endDate, startDate) - yearsDiff * 12;
+                      const daysDiff = differenceInDays(endDate, startDate);
+                      return `${yearsDiff}  ${
+                        yearsDiff > 0 ? 'years' : 'year'
+                      } ${monthsDiff} ${monthsDiff > 0 ? 'months' : 'month'}`;
+                    };
+                    return (
+                      <TableRow
+                        key={i}
+                        sx={{
+                          '&:last-child td, &:last-child th': { border: 0 },
+                        }}
+                      >
+                        <TableCell align='center'>{i}</TableCell>
+                        <TableCell align='center'>{row.companyName}</TableCell>
+                        <TableCell align='center'>{row.startDate}</TableCell>
+                        <TableCell align='center'>{row.endDate}</TableCell>
+                        <TableCell align='center'>
+                          {getDifferenceInDates()}
+                        </TableCell>
+                        <TableCell align='center'>
+                          <Button
+                            size='sm'
+                            onClick={() => handleUpdate(row.id)}
+                          >
+                            Update
+                          </Button>
+                        </TableCell>
+                        <TableCell align='center'>Delete</TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
           )}
         </div>
-        {!hideTable && (
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    #
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    Company Name
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    Start Date
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    End Date
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    Experience
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    Edit
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    className='fw-bold bg-secondary text-white'
-                  >
-                    Delete
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {state.map((row, i) => {
-                  const getDifferenceInDates = () => {
-                    let startDate = new Date(row.startDate);
-                    let endDate = new Date(row.endDate);
-                    const yearsDiff = differenceInYears(endDate, startDate);
-                    const monthsDiff =
-                      differenceInMonths(endDate, startDate) - yearsDiff * 12;
-                    const daysDiff = differenceInDays(endDate, startDate);
-                    return `${yearsDiff}  ${
-                      yearsDiff > 0 ? 'years' : 'year'
-                    } ${monthsDiff} ${monthsDiff > 0 ? 'months' : 'month'}`;
-                  };
-                  return (
-                    <TableRow
-                      key={i}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell align='center'>{i}</TableCell>
-                      <TableCell align='center'>{row.companyName}</TableCell>
-                      <TableCell align='center'>{row.startDate}</TableCell>
-                      <TableCell align='center'>{row.endDate}</TableCell>
-                      <TableCell align='center'>
-                        {getDifferenceInDates()}
-                      </TableCell>
-                      <TableCell align='center'>
-                        <Button size='sm' onClick={() => handleUpdate(row.id)}>
-                          Update
-                        </Button>
-                      </TableCell>
-                      <TableCell align='center'>Delete</TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        )}
-      </div>
+      )}
     </div>
   );
 };
