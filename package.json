@@ -4,19 +4,26 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.0.0",
+    "@mui/material": "^5.14.13",
+    "@mui/x-date-pickers": "^6.16.1",
+    "antd": "^5.10.0",
     "bootstrap": "^5.2.3",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.7",
     "react-icons": "^4.8.0",
+    "react-player": "^2.13.0",
     "react-router-dom": "^6.9.0",
     "uuid": "^9.0.0",
     "yup": "^1.0.2"
