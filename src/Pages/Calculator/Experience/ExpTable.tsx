@@ -6,7 +6,8 @@ import {
 } from '../../../Context/WorkExperienceContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { AiOutlineClose } from 'react-icons/ai';
+import { FiEdit } from 'react-icons/fi';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -93,11 +94,13 @@ const ExpTable = () => {
   }, [state]);
 
   const handleUpdate = (id: string) => {
-    // const data= state[id];
-    // console.log("data",data);
-    // const _id = id && id || ''
     if (id) {
       setEditIndex(id);
+    }
+  };
+  const handleDelete = (id: string) => {
+    if (id) {
+      dispatch({ type: 'DELETE', id: id });
     }
   };
 
@@ -148,7 +151,7 @@ const ExpTable = () => {
         // </div>
       )} */}
       {state.length && (
-        <div className='exp-mui-table exp-form mx-auto'>
+        <div className='exp-mui-table exp-table mx-auto'>
           <div className='d-flex justify-content-between'>
             <div className='buttons d-flex gap-3 my-3'>
               <Button variant='primary' onClick={handleHide}>
@@ -240,7 +243,7 @@ const ExpTable = () => {
                         }}
                       >
                         <TableCell align='center'>{i}</TableCell>
-                        <TableCell align='center'>{row.companyName}</TableCell>
+                        <TableCell align='center'>{row.companyName !== '' ? row.companyName : 'NA'}</TableCell>
                         <TableCell align='center'>{row.startDate}</TableCell>
                         <TableCell align='center'>{row.endDate}</TableCell>
                         <TableCell align='center'>
@@ -251,10 +254,19 @@ const ExpTable = () => {
                             size='sm'
                             onClick={() => handleUpdate(row.id)}
                           >
-                            Update
+                            <FiEdit className='fs-' />
                           </Button>
                         </TableCell>
-                        <TableCell align='center'>Delete</TableCell>
+                        <TableCell align='center'>
+                          {' '}
+                          <Button
+                            size='sm'
+                            variant='secondary'
+                            onClick={() => handleDelete(row.id)}
+                          >
+                            <AiOutlineClose />
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     );
                   })}

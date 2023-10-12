@@ -40,6 +40,11 @@ export type WorkExperienceAction =
       type: 'UPDATE_EXPERIENCE';
       id: string;
       payload: ExperienceData;
+    }
+  | {
+      type: 'DELETE';
+      id: string;
+      // payload: ExperienceData;
     };
 
 export type WorkExperienceContextType = {
@@ -61,7 +66,7 @@ const workExperienceReducer = (
   state: WorkExperienceState,
   action: WorkExperienceAction
 ): WorkExperienceState => {
-  debugger
+  debugger;
   switch (action.type) {
     case 'ADD_EXPERIENCE':
       return [...state, action?.payload];
@@ -73,11 +78,18 @@ const workExperienceReducer = (
       return (state = []);
     case 'UPDATE_EXPERIENCE':
       const states = [...state];
-      const allStatesExceptCurrentState = states.filter((s)=> s.id !== action.id);
-      // const currentState = states.filter((s)=> s.id === action.id);
-      // currentState[0] = action.payload;
-      const updatedState = [...allStatesExceptCurrentState, action.payload]
+      const allStatesExceptCurrentState = states.filter(
+        (s) => s.id !== action.id
+      );
+      const updatedState = [...allStatesExceptCurrentState, action.payload];
       return updatedState;
+    case 'DELETE':
+      const _states = [...state];
+      const _allStatesExceptCurrentState = _states.filter(
+        (s) => s.id !== action.id
+      );
+      const _updatedState = [..._allStatesExceptCurrentState];
+      return _updatedState;
     default:
       return state;
   }
