@@ -41,3 +41,6 @@ body, html {
   font-family: 'Hind Siliguri', sans-serif;
   font-family: 'Inter', sans-serif;
 }
+/* input[type='date']::before {
+  content: attr(placeholder) !important;
+} */

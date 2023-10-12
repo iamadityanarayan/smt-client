@@ -20,6 +20,7 @@ const Experience = () => {
           <ExpTable />
         </div>
       </WorkExperienceProvider>
+      
     </div>
   );
 };

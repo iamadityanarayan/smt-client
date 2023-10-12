@@ -12,11 +12,14 @@ import { IoMdRefresh } from 'react-icons/io';
 
 import {
   ExperienceData,
+  InputExperienceData,
   WorkExperienceContextType,
   useWorkExperience,
 } from '../../../Context/WorkExperienceContext';
 import { Inputs } from './types/experience';
-
+import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useState } from 'react';
+import { format, formatISO } from 'date-fns';
 
 const schema = yup.object({
   companyName: yup.string(),
@@ -37,13 +40,18 @@ const schema = yup.object({
 });
 
 const ExpForm = () => {
-  const { dispatch } = useWorkExperience() as WorkExperienceContextType;
+  const {
+    state,
+    dispatch,
+    editIndex,
+  } = useWorkExperience() as WorkExperienceContextType;
   const {
     handleSubmit,
     reset,
     control,
     formState: { errors },
-  } = useForm<ExperienceData>({
+    setValue,
+  } = useForm<InputExperienceData>({
     defaultValues: {
       companyName: '',
       startDate: '',
@@ -51,16 +59,50 @@ const ExpForm = () => {
     },
     resolver: yupResolver(schema),
   });
-
-  const onSubmit: SubmitHandler<ExperienceData> = (data) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const onSubmit: SubmitHandler<InputExperienceData> = (data) => {
+    debugger;
+    if (isEditMode) {
+      // update experience data here using id
+      dispatch({
+        type: 'UPDATE_EXPERIENCE',
+        id: editIndex,
+        payload: { id: editIndex, ...data },
+      });
+    } else {
+      const _data = {
+        id: uuidv4(),
+        ...data,
+      };
+      dispatch({ type: 'ADD_EXPERIENCE', payload: _data });
+    }
     console.log(data);
-    dispatch({ type: 'ADD_EXPERIENCE', payload: data });
+
     reset();
   };
 
+  useEffect(() => {
+    if (!editIndex) {
+      return;
+    } // if we are not editing an experience then exit out of hook
+    const id: string = editIndex;
+    // const data= state[id];
+    // console.log("data",data);
+    const editState = state.filter((s) => s.id === editIndex);
+    const _data = editState[0];
+    console.log('state data', state);
+    console.log('editIndex', editIndex);
+    console.log('e', editState);
+
+    setValue('companyName', _data.companyName);
+    setValue('startDate', _data.startDate);
+    setValue('endDate', _data.endDate);
+    setIsEditMode(true);
+  }, [editIndex]);
+
   return (
     <div className='py-4'>
-      <Form className='w-50 mx-auto' onSubmit={handleSubmit(onSubmit)}>
+      <Form className='exp-form mx-auto' onSubmit={handleSubmit(onSubmit)}>
         <Row className=' justify-content-center'>
           <Col lg={4} className='mb-3'>
             <Form.Group className=''>
@@ -105,7 +147,7 @@ const ExpForm = () => {
             </Form.Group>
           </Col>
         </Row>
-        <div className='d-grid d-sm-flex gap-3 justify-content-center'>
+        <div className='d-grid d-lg-flex gap-3 justify-content-lg-center'>
           <Button
             variant='secondary'
             className='text-white d-flex align-items-center justify-content-center gap-2'
