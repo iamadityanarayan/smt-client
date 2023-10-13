@@ -20,6 +20,7 @@ import {
   differenceInMonths,
   differenceInYears,
 } from 'date-fns';
+import { saveExperienceToLocalStorage } from '../../../Util/util';
 
 const ExpTable = () => {
   const {
@@ -36,12 +37,12 @@ const ExpTable = () => {
         return toast.success(message, {
           position: toast.POSITION.TOP_RIGHT,
         });
-        break;
+      // break;
       case 'error':
         return toast.error(message, {
           position: toast.POSITION.TOP_RIGHT,
         });
-        break;
+      // break;
 
       default:
         toast.success('No message', {
@@ -55,10 +56,22 @@ const ExpTable = () => {
   };
 
   const handleSaveToLocal = () => {
-    localStorage.setItem('workExperienceData', JSON.stringify(state));
-    setIsSaved(!isSaved);
-    setIsDisabled(false);
-    notify('Saved', 'success');
+    // const originalArray = [{ key: 'value' }];
+    // localStorage.setItem('yourKey', JSON.stringify(originalArray));
+
+    // Later, when checking for tampering
+    const currentArrayString = localStorage.getItem('workExperienceData');
+    if (currentArrayString) {
+      const currentArray = JSON.parse(currentArrayString);
+      if (JSON.stringify(currentArray) !== JSON.stringify(state)) {
+        // Tampering detected
+        saveExperienceToLocalStorage(state);
+        setIsSaved(!isSaved);
+        setIsDisabled(false);
+        notify('Saved', 'success');
+      }
+    }
+    notify('Saved XED', 'success');
   };
 
   const handleRemoveDataFromLocal = () => {
@@ -107,50 +120,7 @@ const ExpTable = () => {
   return (
     <div>
       <ToastContainer />
-      {/* {state.length > 0 && (
-        // <div className='w-50 mx-auto'>
-        //   <div className='buttons d-flex justify-content-end gap-3'>
-        //     <Button
-        //       variant='danger'
-        //       disabled={isDisabled}
-        //       onClick={handleRemoveDataFromLocal}
-        //     >
-        //       Remove all
-        //     </Button>
-        //     <Button variant='primary' onClick={handleSaveToLocal}>
-        //       Save
-        //     </Button>
-        //   </div>
-        //   <div className='exp-table'>
-        //     <div className='exp-header rounded-3 bg-light p-3 mt-4'>
-        //       <Row className=' align-items-center'>
-        //         <Col xs={1}>#</Col>
-        //         <Col>Company</Col>
-        //         <Col>Start Date</Col>
-        //         <Col>End Date</Col>
-        //         <Col></Col>
-        //       </Row>
-        //     </div>
-        //     {state?.map((item, i) => (
-        //       <div
-        //         className='exp-header rounded-3 bg-light p-2 mt-3'
-        //         key={i + 1}
-        //       >
-        //         <Row className=' align-items-center'>
-        //           <Col xs={1}>{i + 1}</Col>
-        //           <Col>{item.companyName}</Col>
-        //           <Col>{item.startDate}</Col>
-        //           <Col>{item.endDate}</Col>
-        //           <Col>
-        //             <Button size='sm'>Update</Button>
-        //           </Col>
-        //         </Row>
-        //       </div>
-        //     ))}
-        //   </div>
-        // </div>
-      )} */}
-      {state.length && (
+      {state.length > 0 && (
         <div className='exp-mui-table exp-table mx-auto'>
           <div className='d-flex justify-content-between'>
             <div className='buttons d-flex gap-3 my-3'>
@@ -175,48 +145,52 @@ const ExpTable = () => {
           </div>
           {!hideTable && (
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+              <Table
+                sx={{ minWidth: 650 }}
+                size='small'
+                aria-label='simple table'
+              >
                 <TableHead>
-                  <TableRow>
+                  <TableRow className=''>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       #
                     </TableCell>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       Company Name
                     </TableCell>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       Start Date
                     </TableCell>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       End Date
                     </TableCell>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       Experience
                     </TableCell>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       Edit
                     </TableCell>
                     <TableCell
                       align='center'
-                      className='fw-bold bg-secondary text-white'
+                      className='fw-bold bg-secondary text-white p-2 px-3'
                     >
                       Delete
                     </TableCell>
@@ -230,7 +204,7 @@ const ExpTable = () => {
                       const yearsDiff = differenceInYears(endDate, startDate);
                       const monthsDiff =
                         differenceInMonths(endDate, startDate) - yearsDiff * 12;
-                      const daysDiff = differenceInDays(endDate, startDate);
+                      // const daysDiff = differenceInDays(endDate, startDate);
                       return `${yearsDiff}  ${
                         yearsDiff > 0 ? 'years' : 'year'
                       } ${monthsDiff} ${monthsDiff > 0 ? 'months' : 'month'}`;
@@ -242,10 +216,22 @@ const ExpTable = () => {
                           '&:last-child td, &:last-child th': { border: 0 },
                         }}
                       >
-                        <TableCell align='center'>{i}</TableCell>
-                        <TableCell align='center'>{row.companyName !== '' ? row.companyName : 'NA'}</TableCell>
+                        <TableCell align='center'>{i + 1}</TableCell>
+                        <TableCell align='center'>
+                          {row.companyName !== ''
+                            ? row.companyName
+                            : `Company ${i + 1}`}
+                        </TableCell>
                         <TableCell align='center'>{row.startDate}</TableCell>
-                        <TableCell align='center'>{row.endDate}</TableCell>
+                        <TableCell align='center'>
+                          {row.present ? (
+                            <span className='btn btn-secondary btn-sm'>
+                              Present
+                            </span>
+                          ) : (
+                            row.endDate
+                          )}
+                        </TableCell>
                         <TableCell align='center'>
                           {getDifferenceInDates()}
                         </TableCell>
@@ -258,7 +244,6 @@ const ExpTable = () => {
                           </Button>
                         </TableCell>
                         <TableCell align='center'>
-                          {' '}
                           <Button
                             size='sm'
                             variant='secondary'
@@ -281,15 +266,3 @@ const ExpTable = () => {
 };
 
 export default ExpTable;
-
-const a = [
-  {
-    obj1: '1 years 2 months',
-  },
-  {
-    obj1: '5 years 8 months',
-  },
-  {
-    obj1: '3 years 6 months',
-  },
-];

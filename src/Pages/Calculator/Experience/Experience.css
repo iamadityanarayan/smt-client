@@ -8,6 +8,7 @@
   background-color: #5e135a !important;
   background-color: #8B78E6 !important; 
   background-color: #1287A5 !important; 
+  background-color: #31bbae !important; 
   min-height: 100vh;
   padding: 0 0 4rem 0;
 }
@@ -52,8 +53,9 @@
     margin-left: auto;
     margin-right: auto;
   }
+
   .exp-table {
-    width: 70%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
   }

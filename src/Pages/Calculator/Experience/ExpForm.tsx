@@ -19,7 +19,7 @@ import {
 import { Inputs } from './types/experience';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
-import { format, formatISO } from 'date-fns';
+import { format, formatISO, isToday, parseISO } from 'date-fns';
 
 const schema = yup.object({
   companyName: yup.string(),
@@ -31,10 +31,18 @@ const schema = yup.object({
       'end-date-after-start',
       'End date cannot be before the start date',
       function (endDate) {
+        debugger;
         const startDate = this.parent.startDate;
         return (
           !startDate || !endDate || new Date(endDate) >= new Date(startDate)
         );
+      }
+    )
+    .test(
+      'end-date-not-in-future',
+      'End date cannot be in the future',
+      function (endDate) {
+        return !endDate || new Date(endDate) <= new Date();
       }
     ),
 });
@@ -61,20 +69,44 @@ const ExpForm = () => {
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const onSubmit: SubmitHandler<InputExperienceData> = (data) => {
-    debugger;
+    let isPresent = false;
+    // Your provided end date
+    const endDate = data.endDate;
+
+    // Parse the provided end date string to a Date object
+    const endDateDate = parseISO(endDate);
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Check if the endDate is equal to the current date
+    const isEndDateToday = isToday(endDateDate);
+
+    // Set a variable to true if the endDate is today
+    if (isEndDateToday) {
+      isPresent = true;
+    } else {
+      isPresent = false;
+    }
+
+    const updatedData = {
+      ...data,
+      present: isPresent,
+    };
     if (isEditMode) {
       // update experience data here using id
       dispatch({
         type: 'UPDATE_EXPERIENCE',
         id: editIndex,
-        payload: { id: editIndex, ...data },
+        payload: { id: editIndex, ...updatedData },
       });
     } else {
-      const _data = {
+      const _updatedData = {
         id: uuidv4(),
-        ...data,
+        ...updatedData,
       };
-      dispatch({ type: 'ADD_EXPERIENCE', payload: _data });
+      if (data.endDate)
+        dispatch({ type: 'ADD_EXPERIENCE', payload: _updatedData });
     }
     console.log(data);
 
@@ -106,7 +138,9 @@ const ExpForm = () => {
         <Row className=' justify-content-center'>
           <Col lg={4} className='mb-3'>
             <Form.Group className=''>
-              <Form.Label className='text-light d-none d-lg-block'>Company Name</Form.Label>
+              <Form.Label className='text-light d-none d-lg-block'>
+                Company Name
+              </Form.Label>
               <Controller
                 control={control}
                 name='companyName'
@@ -116,7 +150,6 @@ const ExpForm = () => {
                     placeholder='Company Name'
                     {...field}
                   />
-                  
                 )}
               />
             </Form.Group>

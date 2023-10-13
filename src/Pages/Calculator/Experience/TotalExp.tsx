@@ -6,57 +6,6 @@ type Props = {};
 const TotalExp = (props: Props) => {
   const { state } = useWorkExperience();
   // Calculate total years and months of work experience
-  // const totalExperience = state.reduce(
-  //   (accumulator, experience) => {
-  //     debugger;
-  //     console.log('first');
-  //     const startDate = new Date(experience.startDate);
-  //     const endDate = new Date(experience.endDate);
-
-  //     console.log('startDate:', startDate);
-  //     console.log('endDate:', endDate);
-
-  //     const yearDiff = endDate.getFullYear() - startDate.getFullYear();
-  //     const monthDiff = endDate.getMonth() - startDate.getMonth();
-
-  //     console.log('yearDiff:', yearDiff);
-  //     console.log('monthDiff:', monthDiff);
-
-  //     accumulator.years += yearDiff;
-  //     accumulator.months += monthDiff;
-
-  //     // Adjust for negative month difference
-  //     if (monthDiff < 0) {
-  //       accumulator.years--;
-  //       accumulator.months += 12;
-  //     }
-
-  //     return accumulator;
-  //   },
-  //   { years: 0, months: 0 }
-  // );
-  // const totalExperience = state.reduce(
-  //   (accumulator, experience) => {
-  //     const startDate = new Date(experience.startDate);
-  //     const endDate = new Date(experience.endDate);
-
-  //     let yearDiff = endDate.getFullYear() - startDate.getFullYear();
-  //     let monthDiff = endDate.getMonth() - startDate.getMonth();
-
-  //     // Adjust for negative month difference
-  //     if (monthDiff < 0) {
-  //       yearDiff--;
-  //       monthDiff += 12;
-  //     }
-
-  //     // Update the accumulator
-  //     accumulator.years += yearDiff;
-  //     accumulator.months += monthDiff;
-
-  //     return accumulator;
-  //   },
-  //   { years: 0, months: 0 }
-  // );
   const totalExperience = state.reduce(
     (accumulator, experience) => {
       const startDate = new Date(experience.startDate);
@@ -92,9 +41,6 @@ const TotalExp = (props: Props) => {
     { years: 0, months: 0 }
   );
 
-  console.log('Total Years:', totalExperience.years);
-  console.log('Total Months:', totalExperience.months);
-  console.log('TT', state);
   return (
     <div className='exp-numbers text-center d-flex flex-column justify-content-center gap-4'>
       <div>
@@ -114,7 +60,11 @@ const TotalExp = (props: Props) => {
               {totalExperience.months}
               {totalExperience.months > 0 && '+'}
             </h1>
-            <p className='text-light text-year line-height-8'>{totalExperience.months >= 2 || totalExperience.months === 0 ? 'months' : 'month'}</p>
+            <p className='text-light text-year line-height-8'>
+              {totalExperience.months >= 2 || totalExperience.months === 0
+                ? 'months'
+                : 'month'}
+            </p>
           </>
         )}
       </div>
@@ -122,7 +72,10 @@ const TotalExp = (props: Props) => {
         <h4 className='text-light mb-0'>
           {totalExperience.years}{' '}
           {totalExperience.years === 1 ? 'year' : 'years'}{' '}
-          {totalExperience.months} {totalExperience.months >= 2 || totalExperience.months === 0 ? 'months' : 'month'}
+          {totalExperience.months}{' '}
+          {totalExperience.months >= 2 || totalExperience.months === 0
+            ? 'months'
+            : 'month'}
         </h4>
       </div>
     </div>

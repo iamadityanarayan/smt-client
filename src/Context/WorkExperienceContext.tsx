@@ -7,6 +7,7 @@ import {
   useReducer,
   useState,
 } from 'react';
+import { saveExperienceToLocalStorage } from '../Util/util';
 
 export interface InputExperienceData {
   companyName: string;
@@ -19,6 +20,7 @@ export interface ExperienceData {
   companyName: string;
   startDate: string;
   endDate: string;
+  present: boolean;
 }
 
 export type WorkExperienceState = ExperienceData[];
@@ -66,12 +68,28 @@ const workExperienceReducer = (
   state: WorkExperienceState,
   action: WorkExperienceAction
 ): WorkExperienceState => {
-  debugger;
   switch (action.type) {
     case 'ADD_EXPERIENCE':
-      return [...state, action?.payload];
+      const newState = [...state, action.payload];
+      newState.sort((a, b) => {
+        const startDateA: Date = new Date(a.startDate);
+        const startDateB: Date = new Date(b.startDate);
+        if (startDateA < startDateB) return 1;
+        if (startDateA > startDateB) return -1;
+        return 0;
+      });
+      return newState;
     case 'DATA_FROM_LS':
-      return (state = action.payload);
+      const newData = action.payload;
+      newData.sort((a, b) => {
+        const startDateA: Date = new Date(a.startDate);
+        const startDateB: Date = new Date(b.startDate);
+        if (startDateA < startDateB) return 1;
+        if (startDateA > startDateB) return -1;
+        return 0;
+      });
+      return (state = newData);
+    // return (state = action.payload);
     case 'REMOVE_ALL':
       localStorage.removeItem('workExperienceData');
       localStorage.setItem('workExperienceData', JSON.stringify([]));
@@ -107,10 +125,32 @@ export const WorkExperienceProvider = ({
     if (savedData) {
       const parsedData = JSON.parse(savedData);
       // Dispatch action to update the state with the loaded data
-      dispatch({ type: 'DATA_FROM_LS', payload: parsedData });
-      console.log(savedData);
+      console.log('ss', savedData);
+      const _newData: ExperienceData[] = parsedData;
+      const newDate = new Date();
+
+      _newData?.map((e) => {
+        if (e.present) {
+          if (new Date(e.endDate) < new Date()) {
+            e.endDate = newDate.toLocaleDateString().split('/').join('-');
+            console.log('new end date', e.endDate);
+          }
+        }
+      });
+      
+      console.log('-__new ', _newData);
+      saveExperienceToLocalStorage(_newData);
+      localStorage.setItem('state', JSON.stringify('true'));
+      dispatch({ type: 'DATA_FROM_LS', payload: _newData });
     } else {
       localStorage.setItem('workExperienceData', JSON.stringify(state));
+      localStorage.setItem('state', JSON.stringify('false'));
+    }
+
+    if (state) {
+      console.log('value 1', state);
+    } else {
+      console.log('No state', state);
     }
   }, []);
   const [editIndex, setEditIndex] = useState<string>('');

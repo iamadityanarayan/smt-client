@@ -44,3 +44,7 @@ body, html {
 /* input[type='date']::before {
   content: attr(placeholder) !important;
 } */
+
+.bg-light-purple{
+  background-color: #9356A0;
+}
