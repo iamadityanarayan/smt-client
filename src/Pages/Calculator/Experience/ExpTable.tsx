@@ -71,7 +71,7 @@ const ExpTable = () => {
         notify('Saved', 'success');
       }
     }
-    notify('Saved XED', 'success');
+    // notify('Saved XED', 'success');
   };
 
   const handleRemoveDataFromLocal = () => {
@@ -135,7 +135,7 @@ const ExpTable = () => {
                   disabled={isDisabled}
                   onClick={handleRemoveDataFromLocal}
                 >
-                  Remove all
+                  Delete All
                 </Button>
                 <Button variant='primary' onClick={handleSaveToLocal}>
                   Save

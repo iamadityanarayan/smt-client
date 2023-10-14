@@ -31,18 +31,10 @@ const schema = yup.object({
       'end-date-after-start',
       'End date cannot be before the start date',
       function (endDate) {
-        debugger;
         const startDate = this.parent.startDate;
         return (
           !startDate || !endDate || new Date(endDate) >= new Date(startDate)
         );
-      }
-    )
-    .test(
-      'end-date-not-in-future',
-      'End date cannot be in the future',
-      function (endDate) {
-        return !endDate || new Date(endDate) <= new Date();
       }
     ),
 });
@@ -68,6 +60,8 @@ const ExpForm = () => {
     resolver: yupResolver(schema),
   });
   const [isEditMode, setIsEditMode] = useState(false);
+  const [showForm, setshowForm] = useState(false);
+  const handleForm = () => setshowForm(!showForm);
   const onSubmit: SubmitHandler<InputExperienceData> = (data) => {
     let isPresent = false;
     // Your provided end date
@@ -134,105 +128,118 @@ const ExpForm = () => {
 
   return (
     <div className='py-4'>
-      <Form className='exp-form mx-auto' onSubmit={handleSubmit(onSubmit)}>
-        <Row className=' justify-content-center'>
-          <Col lg={4} className='mb-3'>
-            <Form.Group className=''>
-              <Form.Label className='text-light d-none d-lg-block'>
-                Company Name
-              </Form.Label>
-              <Controller
-                control={control}
-                name='companyName'
-                render={({ field }) => (
-                  <Form.Control
-                    type='text'
-                    placeholder='Company Name'
-                    {...field}
-                  />
+      <div className='d-flex justify-content-center'>
+        <Button variant='primary' onClick={handleForm}>
+          {showForm ? 'Hide Form' : 'Show Form'}
+        </Button>
+      </div>
+      {showForm && (
+        <Form className='exp-form mx-auto' onSubmit={handleSubmit(onSubmit)}>
+          <Row className=' justify-content-center'>
+            <Col lg={4} className='mb-3'>
+              <Form.Group className=''>
+                <Form.Label className='text-light d-none d-lg-block'>
+                  Company Name
+                </Form.Label>
+                <Controller
+                  control={control}
+                  name='companyName'
+                  render={({ field }) => (
+                    <Form.Control
+                      type='text'
+                      placeholder='Company Name'
+                      {...field}
+                    />
+                  )}
+                />
+              </Form.Group>
+            </Col>
+            <Col lg={4} className='mb-3 d-none d-lg-block'>
+              <Form.Group>
+                <Form.Label className='text-light'>Start Date</Form.Label>
+                <Controller
+                  name='startDate'
+                  control={control}
+                  render={({ field }) => (
+                    <Form.Control type='date' {...field} />
+                  )}
+                />
+                {errors.startDate && (
+                  <Alert variant='danger'>{errors.startDate.message}</Alert>
                 )}
-              />
-            </Form.Group>
-          </Col>
-          <Col lg={4} className='mb-3 d-none d-lg-block'>
-            <Form.Group>
-              <Form.Label className='text-light'>Start Date</Form.Label>
+              </Form.Group>
+            </Col>
+            <Col lg={4} className='mb-3 d-lg-none d-block'>
               <Controller
                 name='startDate'
                 control={control}
-                render={({ field }) => <Form.Control type='date' {...field} />}
+                render={({ field }) => (
+                  // <Form.Control type='date' {...field} />
+                  <InputGroup className=''>
+                    <InputGroup.Text id='basic-addon1'>
+                      Start Date
+                    </InputGroup.Text>
+                    <Form.Control type='date' {...field} />
+                  </InputGroup>
+                )}
               />
               {errors.startDate && (
                 <Alert variant='danger'>{errors.startDate.message}</Alert>
               )}
-            </Form.Group>
-          </Col>
-          <Col lg={4} className='mb-3 d-lg-none d-block'>
-            <Controller
-              name='startDate'
-              control={control}
-              render={({ field }) => (
-                // <Form.Control type='date' {...field} />
-                <InputGroup className=''>
-                  <InputGroup.Text id='basic-addon1'>
-                    Start Date
-                  </InputGroup.Text>
-                  <Form.Control type='date' {...field} />
-                </InputGroup>
-              )}
-            />
-            {errors.startDate && (
-              <Alert variant='danger'>{errors.startDate.message}</Alert>
-            )}
-          </Col>
-          <Col lg={4} className='mb-3 d-none d-lg-block'>
-            <Form.Group>
-              <Form.Label className='text-light'>End Date</Form.Label>
+            </Col>
+            <Col lg={4} className='mb-3 d-none d-lg-block'>
+              <Form.Group>
+                <Form.Label className='text-light'>End Date</Form.Label>
+                <Controller
+                  name='endDate'
+                  control={control}
+                  render={({ field }) => (
+                    <Form.Control type='date' {...field} />
+                  )}
+                />
+                {errors.endDate && (
+                  <Alert variant='danger'>{errors.endDate.message}</Alert>
+                )}
+              </Form.Group>
+            </Col>
+            <Col lg={4} className='mb-3 d-lg-none d-block'>
               <Controller
                 name='endDate'
                 control={control}
-                render={({ field }) => <Form.Control type='date' {...field} />}
+                render={({ field }) => (
+                  // <Form.Control type='date' {...field} />
+                  <InputGroup className=''>
+                    <InputGroup.Text id='basic-addon2'>
+                      End Date
+                    </InputGroup.Text>
+                    <Form.Control type='date' {...field} />
+                  </InputGroup>
+                )}
               />
-              {errors.endDate && (
-                <Alert variant='danger'>{errors.endDate.message}</Alert>
+              {errors.startDate && (
+                <Alert variant='danger'>{errors.startDate.message}</Alert>
               )}
-            </Form.Group>
-          </Col>
-          <Col lg={4} className='mb-3 d-lg-none d-block'>
-            <Controller
-              name='endDate'
-              control={control}
-              render={({ field }) => (
-                // <Form.Control type='date' {...field} />
-                <InputGroup className=''>
-                  <InputGroup.Text id='basic-addon2'>End Date</InputGroup.Text>
-                  <Form.Control type='date' {...field} />
-                </InputGroup>
-              )}
-            />
-            {errors.startDate && (
-              <Alert variant='danger'>{errors.startDate.message}</Alert>
-            )}
-          </Col>
-        </Row>
-        <div className='d-grid d-lg-flex gap-3 justify-content-lg-center'>
-          <Button
-            variant='secondary'
-            className='text-white d-flex align-items-center justify-content-center gap-2'
-            type='submit'
-          >
-            <HiPlus className='fs-5' /> Add & Calculate
-          </Button>
-          <Button
-            variant='warning'
-            className='text-white d-flex align-items-center justify-content-center gap-2'
-            type='reset'
-            onClick={() => reset()}
-          >
-            <IoMdRefresh className='fs-5' /> Reset
-          </Button>
-        </div>
-      </Form>
+            </Col>
+          </Row>
+          <div className='d-grid d-lg-flex gap-3 justify-content-lg-center'>
+            <Button
+              variant='secondary'
+              className='text-white d-flex align-items-center justify-content-center gap-2'
+              type='submit'
+            >
+              <HiPlus className='fs-5' /> Add & Calculate
+            </Button>
+            <Button
+              variant='warning'
+              className='text-white d-flex align-items-center justify-content-center gap-2'
+              type='reset'
+              onClick={() => reset()}
+            >
+              <IoMdRefresh className='fs-5' /> Reset
+            </Button>
+          </div>
+        </Form>
+      )}
     </div>
   );
 };
