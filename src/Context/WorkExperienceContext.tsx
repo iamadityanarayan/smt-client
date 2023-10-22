@@ -131,8 +131,14 @@ export const WorkExperienceProvider = ({
 
       _newData?.map((e) => {
         if (e.present) {
-          if (new Date(e.endDate) < new Date()) {
-            e.endDate = newDate.toLocaleDateString().split('/').join('-')
+          debugger
+          const check = new Date(e.endDate) < new Date()
+          if (check) {
+            e.endDate = newDate.toLocaleDateString().split('/').reverse().join('-');
+            var d = e.endDate.split('-');
+            var x = [d[0],d[2],d[1]];
+            var y = x.join('-');
+            e.endDate = y
             console.log('new end date', e.endDate)
           }
         }
