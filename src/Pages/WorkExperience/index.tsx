@@ -1,3 +1,3 @@
-import WorkExp from "./WorkExp";
+import WorkExp from './WorkExp'
 
-export default WorkExp;
+export default WorkExp

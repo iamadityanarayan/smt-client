@@ -4,11 +4,11 @@
 
 .bg-color {
   width: 100%;
-  background-color: #F4D03F !important;
+  background-color: #f4d03f !important;
   background-color: #5e135a !important;
-  background-color: #8B78E6 !important; 
-  background-color: #1287A5 !important; 
-  background-color: #31bbae !important; 
+  background-color: #8b78e6 !important;
+  background-color: #1287a5 !important;
+  background-color: #31bbae !important;
   min-height: 100vh;
   padding: 0 0 4rem 0;
 }
@@ -60,7 +60,6 @@
     margin-right: auto;
   }
 }
-
 
 .line-height-8 {
   line-height: 0.5;

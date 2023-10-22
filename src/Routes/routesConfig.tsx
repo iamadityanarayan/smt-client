@@ -1,6 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
-import ErrorPage from '../Pages/Error';
-import Experience from '../Pages/Calculator/Experience/Experience';
+import { createBrowserRouter } from 'react-router-dom'
+import ErrorPage from '../Pages/Error'
+import Experience from '../Pages/Calculator/Experience/Experience'
 
 export const router = createBrowserRouter([
   {
@@ -8,4 +8,4 @@ export const router = createBrowserRouter([
     element: <Experience />,
     errorElement: <ErrorPage />,
   },
-]);
+])

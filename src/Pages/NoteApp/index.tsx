@@ -1,3 +1,3 @@
-import NoteApp from "./NoteApp";
+import NoteApp from './NoteApp'
 
-export default NoteApp;
+export default NoteApp

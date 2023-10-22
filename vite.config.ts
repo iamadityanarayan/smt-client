@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   // base: '/smt-client/',
   server: {
-    port: 3000
-  }
+    port: 3004,
+  },
 })

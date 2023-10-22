@@ -1,10 +1,9 @@
-import { NavLink } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-type Props = {}
+import { NavLink } from 'react-router-dom'
+import Nav from 'react-bootstrap/Nav'
 
-const Sidebar = (props: Props) => {
+const Sidebar = () => {
   return (
-    <div className="sidebar mx-3 border-2 border-end " style={{width:'268px'}}>
+    <div className="sidebar mx-3 border-2 border-end ">
       <Nav className="nav-pills flex-column mb-auto me-3">
         {/* <NavLink
           className={(props) => {
@@ -18,12 +17,12 @@ const Sidebar = (props: Props) => {
         </NavLink> */}
         <NavLink
           className={(props) => {
-            return `${props.isActive ? "active" : " inactive "
-              } nav-link my-1 rounded-1`;
+            return `${
+              props.isActive ? 'active' : ' inactive '
+            } nav-link my-1 rounded-1`
           }}
           to="/"
-          end
-        >
+          end>
           Experience
         </NavLink>
       </Nav>

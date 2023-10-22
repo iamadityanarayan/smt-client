@@ -4,9 +4,8 @@ import { useRouteError } from 'react-router-dom'
 type Props = {}
 
 const ErrorPage = (props: Props) => {
-
-  const error: any = useRouteError();
-  console.error(error);
+  const error: any = useRouteError()
+  console.error(error)
 
   return (
     <div id="error-page">
@@ -16,7 +15,7 @@ const ErrorPage = (props: Props) => {
         <i>{error.statusText || error.message}</i>
       </p>
     </div>
-  );
+  )
 }
 
 export default ErrorPage
