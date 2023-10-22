@@ -179,7 +179,7 @@ const ExpTable = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {state.map((row, i) => {
+                  {state?.map((row, i) => {
                     const getDifferenceInDates = () => {
                       let startDate = new Date(row.startDate)
                       let endDate = new Date(row.endDate)
@@ -201,7 +201,7 @@ const ExpTable = () => {
                         <TableCell align="center">
                           {row.companyName !== ''
                             ? row.companyName
-                            : `Company ${i + 1}`}
+                            : `Your Company `}
                         </TableCell>
                         <TableCell align="center">{row.startDate}</TableCell>
                         <TableCell align="center">

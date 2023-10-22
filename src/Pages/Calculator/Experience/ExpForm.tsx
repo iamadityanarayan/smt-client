@@ -125,7 +125,7 @@ const ExpForm = () => {
   return (
     <div className="py-4">
       <div className="d-flex justify-content-center">
-        <Button variant="primary" onClick={handleForm}>
+        <Button variant="primary" onClick={handleForm} className="my-3">
           {showForm ? 'Hide Form' : 'Show Form'}
         </Button>
       </div>
