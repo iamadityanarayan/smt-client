@@ -44,9 +44,9 @@ const schema = yup.object({
       if (value) {
         return isBefore(
           new Date(
-            (document.getElementById('startDate') as HTMLInputElement).value,
+            (document.getElementById('startDate') as HTMLInputElement).value
           ),
-          new Date(value),
+          new Date(value)
         )
         // return true;
       }
@@ -163,7 +163,9 @@ const WorkExp = () => {
 
   return (
     <React.Fragment>
-      <h2 className="page-title text-secondary fw-bold">Online Work Experience Calculator</h2>
+      <h2 className="page-title text-secondary fw-bold">
+        Online Work Experience Calculator
+      </h2>
       <hr />
       <div className="exp-form">
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -225,15 +227,13 @@ const WorkExp = () => {
             <Button
               variant="secondary"
               className="text-white d-flex align-items-center justify-content-center gap-2"
-              type="submit"
-            >
+              type="submit">
               <HiPlus className="fs-5" /> Add & Calculate
             </Button>
             <Button
               variant="warning"
               className="text-white d-flex align-items-center justify-content-center gap-2"
-              type="reset"
-            >
+              type="reset">
               <IoMdRefresh className="fs-5" /> Reset
             </Button>
           </div>
@@ -245,7 +245,10 @@ const WorkExp = () => {
           <div className="show-total mt-5">
             <p className="text-center fs-5">
               {' '}
-              Total Experience: <span className='fw-bold text-decoration-underline text-secondary'>{totalDurationCount}</span>
+              Total Experience:{' '}
+              <span className="fw-bold text-decoration-underline text-secondary">
+                {totalDurationCount}
+              </span>
             </p>
           </div>
 
@@ -254,7 +257,7 @@ const WorkExp = () => {
           </div>
           <div className="show-details mb-4">
             <Table responsive striped bordered hover>
-              <thead className='bg-info text-white'>
+              <thead className="bg-info text-white">
                 <tr>
                   <th>#</th>
                   <th>Company Name</th>
@@ -284,8 +287,7 @@ const WorkExp = () => {
                     <td>
                       <span
                         className="btn btn-danger btn-sm"
-                        onClick={() => handleDelete(item.id)}
-                      >
+                        onClick={() => handleDelete(item.id)}>
                         Delete
                       </span>
                     </td>

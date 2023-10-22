@@ -1,33 +1,11 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import Dashboard from "../Pages/Dashboard";
-import ErrorPage from "../Pages/Error";
-import NoteApp from "../Pages/NoteApp";
-import WorkExp from "../Pages/WorkExperience";
-import AppLayout from "./AppLayout";
+import { createBrowserRouter } from 'react-router-dom'
+import ErrorPage from '../Pages/Error'
+import Experience from '../Pages/Calculator/Experience/Experience'
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: (<AppLayout />),
+    path: '/',
+    element: <Experience />,
     errorElement: <ErrorPage />,
-    children: [
-      // {
-      //   path: "/",
-      //   element: <Dashboard />,
-      // },
-      {
-        path: "/",
-        element: <WorkExp />,
-      },
-      {
-        path: "/na",
-        element: <NoteApp />,
-      },
-    ],
   },
-]);
+])

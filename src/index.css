@@ -1,34 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Signika+Negative:wght@300;400;500;600;700&display=swap');
 @import url(./assets/Styles/main.css);
 
-body, html{
+body,
+html {
   font-family: 'Signika Negative', sans-serif;
 }
-.font-lobster{
+
+.font-lobster {
   font-family: 'Lobster', cursive;
 }
 
-.sidebar .nav-pills .nav-link{
-  color:black;
-  transition: color .2s,opacity .2s;
+.sidebar .nav-pills .nav-link {
+  color: black;
+  transition:
+    color 0.2s,
+    opacity 0.2s;
   opacity: 0.8;
 }
 
-.sidebar .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-  color:black;
+.sidebar .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: black;
   opacity: 1;
-  background-color:#fff!important;
-  transition: color .2s,opacity .2s;
-  background-image: linear-gradient(90deg,#F4F4F4 0%,#EFEFEF 100%);
+  background-color: #fff !important;
+  transition:
+    color 0.2s,
+    opacity 0.2s;
+  background-image: linear-gradient(90deg, #f4f4f4 0%, #efefef 100%);
 }
 
-.sidebar .nav-link:focus, .nav-link:hover {
-  color:black ;
+.sidebar .nav-link:focus,
+.nav-link:hover {
+  color: black;
   opacity: 1;
-  background-image: linear-gradient(90deg,#F4F4F4 0%,#EFEFEF 100%);
-  transition: color .2s,opacity .2s;
+  background-image: linear-gradient(90deg, #f4f4f4 0%, #efefef 100%);
+  transition:
+    color 0.2s,
+    opacity 0.2s;
 }
 
-._f-space{
+._f-space {
   text-indent: 10px;
+}
+
+.app-font {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+/* input[type='date']::before {
+  content: attr(placeholder) !important;
+} */
+
+.bg-light-purple {
+  background-color: #9356a0;
 }

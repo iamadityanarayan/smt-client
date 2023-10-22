@@ -1,23 +1,23 @@
-$primary: #4700D8;
-$secondary: #9900F0;
-$warning: #F900BF;
-$info: #1C82AD;
+$primary: #4700d8;
+$secondary: #9900f0;
+$warning: #f900bf;
+$info: #1c82ad;
 
 $btn-box-shadow: none;
 $btn-focus-width: 0;
 $btn-focus-box-shadow: none;
 $btn-active-box-shadow: none;
 
-$font-family-sans-serif: "Arial";
-$font-family-monospace: "Ubuntu";
+$font-family-sans-serif: 'Arial';
+$font-family-monospace: 'Ubuntu';
 
 $input-btn-focus-color-opacity: 0;
 
-@import "../../node_modules/bootstrap/scss/_functions.scss";
-@import "../../node_modules/bootstrap/scss/_variables.scss";
-@import "../../node_modules/bootstrap/scss/maps.scss";
-@import "../../node_modules/bootstrap/scss/_mixins.scss";
-@import "../../node_modules/bootstrap/scss/_utilities.scss";
-@import "../../node_modules/bootstrap/scss/utilities/api.scss";
+@import '../../node_modules/bootstrap/scss/_functions.scss';
+@import '../../node_modules/bootstrap/scss/_variables.scss';
+@import '../../node_modules/bootstrap/scss/maps.scss';
+@import '../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../node_modules/bootstrap/scss/_utilities.scss';
+@import '../../node_modules/bootstrap/scss/utilities/api.scss';
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';

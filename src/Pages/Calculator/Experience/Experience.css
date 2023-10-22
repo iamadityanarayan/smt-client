@@ -1,0 +1,70 @@
+.exp {
+  width: 100%;
+}
+
+.bg-color {
+  width: 100%;
+  background-color: #f4d03f !important;
+  background-color: #5e135a !important;
+  background-color: #8b78e6 !important;
+  background-color: #1287a5 !important;
+  background-color: #31bbae !important;
+  min-height: 100vh;
+  padding: 0 0 4rem 0;
+}
+
+@media (min-width: 320px) {
+  .exp-numbers {
+    padding-top: 7rem;
+  }
+
+  .font-digit {
+    font-size: clamp(5.25rem, 2.0285rem + 16.1074vw, 9.75rem);
+  }
+
+  .text-year {
+    font-size: clamp(3.5rem, 1.5313rem + 9.8434vw, 6.25rem);
+  }
+
+  .exp-form {
+    width: 100%;
+  }
+  .exp-table {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .exp-numbers {
+    padding-top: 10rem;
+  }
+
+  .font-digit {
+    font-size: clamp(5.25rem, 2.0285rem + 16.1074vw, 9.75rem);
+  }
+
+  .text-year {
+    font-size: clamp(1rem, -0.675rem + 8.375vw, 9.375rem);
+    font-size: clamp(1rem, 0.125rem + 4.375vw, 5.375rem);
+  }
+
+  .exp-form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .exp-table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.line-height-8 {
+  line-height: 0.5;
+}
+
+.z-10 {
+  z-index: 10;
+}
