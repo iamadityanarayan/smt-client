@@ -136,7 +136,7 @@ export const WorkExperienceProvider = ({
           if (check) {
             e.endDate = newDate.toLocaleDateString().split('/').reverse().join('-');
             var d = e.endDate.split('-');
-            var x = [d[0],d[2],d[1]];
+            var x = [d[0],d[1],d[2]];
             var y = x.join('-');
             e.endDate = y
             console.log('new end date', e.endDate)
