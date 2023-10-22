@@ -29,12 +29,12 @@ const App = () => {
       removeExperienceToLocalStorage('workExperienceData')
       saveExperienceToLocalStorage([] as ExperienceData[])
     }
-    // setTimeout(() => {
-    //   resetBoundary();
-    //   setTimeout(() => {
-    //     window.location.reload();
-    //   });
-    // }, 5000);
+    setTimeout(() => {
+      resetBoundary()
+      setTimeout(() => {
+        window.location.reload()
+      })
+    }, 5000)
     return (
       <div
         role="alert"
